@@ -1,4 +1,4 @@
-# CS202 Project ResourceContainer
+# CS202 Project: Resource Container
 
 ## Overview
 
@@ -46,7 +46,7 @@ Finally, you can now go to the benchmark directory to get the benchmark program 
 
 For example, if type "./test.sh 1 128 4096 1 1", it will generate 1 container which is registered by 1 task, and it will have 4096 bytes data in each object and 128 objects in total. If type "./test.sh 2 128 4096 2 1 256 8192 1 1", it will generate 2 containers where the first container has 2 tasks, 4096 bytes data in each object and 128 objects in total and those objects are shared by these tasks in the 1st container. For the 2nd container, it will have only one task and contain 256 8192B objects in totoal. So on and so forth.
 
-No matter you're using VMWare or a real machine, or VCL, it's always a good practice to control/maintain/backup your work using github.
+No matter you're using VMWare or a real machine, it's always a good practice to control/maintain/backup your work using github.
 
 Your tasks
 
