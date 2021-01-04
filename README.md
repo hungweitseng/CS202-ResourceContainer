@@ -104,11 +104,11 @@ You need to name the tarball as {1st_members_sid}_{2nd_members_sid}_container.ta
 
 6. You may need to know these variable
 
-volatile long TASK_INTERRUPTIBLE;
+- volatile long TASK_INTERRUPTIBLE;
 
-volatile long TASK_RUNNING;
+- volatile long TASK_RUNNING;
 
-struct task_struct *current;
+- struct task_struct *current;
 
-gfp_t GFP_KERNEL;
+- gfp_t GFP_KERNEL;
 
