@@ -6,7 +6,7 @@
 #    exit
 #fi
 
-#sudo insmod kernel_module/resource_container.ko
+sudo insmod kernel_module/resource_container.ko
 sudo chmod 777 /dev/rcontainer
 #echo $@
 ./benchmark/benchmark "$@"
@@ -15,4 +15,4 @@ cat *.log
 # if you want to see the log for debugging, comment out the following line.
 rm -f *.log 
 
-#sudo rmmod resource_container
+sudo rmmod resource_container
