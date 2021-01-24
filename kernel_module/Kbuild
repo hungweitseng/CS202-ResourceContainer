@@ -1,0 +1,4 @@
+TARGET = resource_container
+obj-m := resource_container.o
+resource_container-objs := src/core.o src/ioctl.o interface.o
+ccflags-y := -I$(src)/include 
