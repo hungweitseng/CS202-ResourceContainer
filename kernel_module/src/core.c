@@ -30,7 +30,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "resource_container.h"
-#include <asm/uaccess.h>
+//#include <asm/uaccess.h>
+#include <asm/segment.h>
+//#include <processor.h>
 #include <linux/slab.h>
 #include <linux/kernel.h>
 #include <linux/errno.h>
