@@ -171,6 +171,6 @@ int main(int argc, char *argv[])
         }
     }
     free(pid);
-    free(data);
+//    free(data);
     return 0;
 }
