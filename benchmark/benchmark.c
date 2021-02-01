@@ -130,6 +130,11 @@ int main(int argc, char *argv[])
     for (i = 0 ; *current_value < max; i++)
     {
         rcontainer_lock(devfd, 1);
+        if(*current_value >= max)
+        {
+            rcontainer_unlock(devfd, 1);
+            break;
+        }
         mapped_data = (int *)rcontainer_heap_alloc(devfd, 1, heap_size);
 
         // error handling
