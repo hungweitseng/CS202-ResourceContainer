@@ -87,6 +87,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Device open failed");
         exit(1);
     }
+    rcontainer_init(devfd);
     k =0;
     // parent process forks children
     for (i = 0; i < (number_of_containers); i++)
