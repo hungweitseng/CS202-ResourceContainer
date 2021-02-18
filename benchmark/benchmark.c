@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 {
     // variable initialization
     int i = 0; 
+    int *initialized;
     int total_number_of_processes = 0, heap_size = 8192, number_of_containers = 1;
     int a, j, k, cid, size, stat, child_pid, devfd, max_size_of_objects_with_buffer;
     char filename[256];
@@ -121,8 +122,15 @@ int main(int argc, char *argv[])
     // create/link this process to a container.
     rcontainer_create(devfd, cid);
     rcontainer_lock(devfd, 0);
-    current_value = (int *)rcontainer_heap_alloc(devfd, 0, sizeof(int));
-    *current_value = 0;
+    rcontainer_lock(devfd, 1);
+    initialized = (int *)rcontainer_heap_alloc(devfd, 0, sizeof(int));
+    current_value = (int *)rcontainer_heap_alloc(devfd, 1, sizeof(int));
+    if(*initialized==0)
+    {
+        *current_value = 0;
+        *initialized = 1;
+    }
+    rcontainer_unlock(devfd, 1);
     rcontainer_unlock(devfd, 0);
     
     max = containers[i].heap_size/sizeof(int);
@@ -130,13 +138,13 @@ int main(int argc, char *argv[])
     // Writing to objects
     for (i = 0 ; *current_value < max; i++)
     {
-        rcontainer_lock(devfd, 1);
+        rcontainer_lock(devfd, 2);
         if(*current_value >= max)
         {
-            rcontainer_unlock(devfd, 1);
+            rcontainer_unlock(devfd, 2);
             break;
         }
-        mapped_data = (int *)rcontainer_heap_alloc(devfd, 1, heap_size);
+        mapped_data = (int *)rcontainer_heap_alloc(devfd, 2, heap_size);
 
         // error handling
         if (!mapped_data)
@@ -146,11 +154,13 @@ int main(int argc, char *argv[])
         }
 
         // generate a random number to write into the object.
+        rcontainer_lock(devfd, 1);
         mapped_data[*current_value]=*current_value;
         *current_value = *current_value + 1;
-        progress++;
         // prints out the result into the log
         rcontainer_unlock(devfd, 1);
+        rcontainer_unlock(devfd, 2);
+        progress++;
     }
     for (i = 0; i < max; i++)
     {
