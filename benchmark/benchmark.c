@@ -168,6 +168,9 @@ int main(int argc, char *argv[])
     }
     fprintf(fp, "Process: %d in container %d produces %d numbers in the heap. Heap checksum is %d. Should be %d\n", getpid(), cid, progress, sum, (max-1)*(max)/2);
     // try delete something
+    rcontainer_lock(devfd, 2);
+    rcontainer_free(devfd, 2);
+    rcontainer_unlock(devfd, 2);
     rcontainer_lock(devfd, 1);
     rcontainer_free(devfd, 1);
     rcontainer_unlock(devfd, 1);
