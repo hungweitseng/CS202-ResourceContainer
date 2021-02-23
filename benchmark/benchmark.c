@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
             rcontainer_unlock(devfd, 2);
             break;
         }
-        mapped_data = (int *)rcontainer_heap_alloc(devfd, 2, heap_size);
+        mapped_data = (int *)rcontainer_heap_alloc(devfd, 2, containers[cid].heap_size);
 
         // error handling
         if (!mapped_data)
