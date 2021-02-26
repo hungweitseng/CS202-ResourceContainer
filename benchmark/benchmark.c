@@ -162,10 +162,12 @@ int main(int argc, char *argv[])
         rcontainer_unlock(devfd, 2);
         progress++;
     }
+    rcontainer_lock(devfd, 2);
     for (i = 0; i < max; i++)
     {
         sum += mapped_data[i];
     }
+    rcontainer_unlock(devfd, 2);
     fprintf(fp, "Process: %d in container %d produces %d numbers in the heap. Heap checksum is %d. Should be %d\n", getpid(), cid, progress, sum, (max-1)*(max)/2);
     // try delete something
     rcontainer_lock(devfd, 2);
